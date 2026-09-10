@@ -1,11 +1,12 @@
 {
- "updated": "9 Sep 2026, 23:22 UTC — JMA active-cyclone feed + port/terminal advisories",
- "asOf": "2026-09-09",
+ "updated": "10 Sep 2026, 22:13 UTC — JMA active-cyclone feed + port/terminal advisories",
+ "asOf": "2026-09-10",
  "sources": [
-  "JMA bosai typhoon feed (targetTc.json), read 9 Sep 2026. Empty array for the third consecutive run: no active tropical cyclones anywhere in the JMA basin. Typhoon Saudel (No. 2618) dissipated after its 3 September Fujian landfall and TC2628 Krovanh dropped out of active tracking on 8 September. With no analysis or forecast points to score, no threats are recorded this run.",
-  "Kuehne+Nagel weekly port operational update, 2-8 Sep 2026 (published 8 Sep 2026) — still the freshest source with explicit per-port waiting times; the weekly cadence means the next edition is not due until 15 Sep. Shanghai 7-day average vessel waiting time 4.72 days with terminal peaks above 9 days at WGQ2/WGQ5 and above 7 days at YS12; Ningbo 3.58 days; Yantian 2.45 days; Qingdao 72-96 hours on wind and vessel bunching; Busan around 12 hours, PNIT nearer 20 hours. https://mykn.kuehne-nagel.com/news/article/port-operational-updates-from-08-09-2026",
-  "SEKO Asia-Pacific Logistics Monitoring Center, checked 9 Sep 2026 — page has not been refreshed since Friday 4 September 2026, 10:00 HKT and is therefore stale relative to Kuehne+Nagel. It confirms Saudel dissipated and all terminals operational, and reports no new closure. https://www.sekologistics.com/hk-en/resources/asia-supply-chain-weather-center-live-port-freight-updates/",
-  "MSC customer advisories, checked 9 Sep 2026 — no port-closure or weather advisory posted since the Saudel period; the most recent items are commercial notices. https://www.msc.com/en/newsroom/customer-advisories"
+  "JMA bosai typhoon feed (targetTc.json), read 10 Sep 2026 22:13 UTC. Empty array for the fourth consecutive run: no active tropical cyclones anywhere in the JMA basin. Typhoon Saudel (No. 2618) dissipated after its 3 September Fujian landfall and TC2628 Krovanh dropped out of active tracking on 8 September. With no analysis or forecast points to score, no threats are recorded this run.",
+  "Kuehne+Nagel weekly port operational update, 2-8 Sep 2026 (published 8 Sep 2026) — still the freshest source with explicit per-port waiting times, and unchanged since the last run because the next weekly edition is not due until 15 Sep. Shanghai 7-day average vessel waiting time 4.72 days with terminal peaks above 9 days at WGQ2/WGQ5 and above 7 days at YS12; Ningbo 3.58 days; Yantian 2.45 days; Qingdao 72-96 hours; Busan around 12 hours. https://mykn.kuehne-nagel.com/news/article/port-operational-updates-from-08-09-2026",
+  "SEKO Asia-Pacific Logistics Monitoring Center, checked 10 Sep 2026 — page still stamped 'Last Updated: Friday, September 4, 2026 | 10:00 HKT', so it has gone six days stale and adds nothing new. It confirms Saudel removed from CMA active tracking after the 3 September Fujian landfall, Shanghai and Ningbo clearing backlogs, and all offices operational. https://www.sekologistics.com/hk-en/resources/asia-supply-chain-weather-center-live-port-freight-updates/",
+  "MSC customer advisories, checked 10 Sep 2026 — newest entry is 3 September and concerns Suez piracy risk, not a tracked port. No port-closure notice for any tracked port. https://www.msc.com/en/newsroom/customer-advisories",
+  "Web search for closures, strikes and fog affecting the tracked ports over 9-10 Sep 2026 returned nothing new. The only fresh labour action found anywhere was in Rotterdam, which is outside the tracked set."
  ],
  "systems": [],
  "ports": {
@@ -17,14 +18,15 @@
    "reportedWaitLo": 3.6,
    "reportedWaitHi": 9,
    "waitLabel": "Ningbo 7-day average 3.58 days, Shanghai 4.72 days; terminal peaks above 9 days at Shanghai WGQ2/WGQ5 and above 7 days at YS12 — Kuehne+Nagel, 8 Sep 2026",
-   "note": "eventEnded stays at 8 September, the first run with no active system in the JMA feed, exactly as it was set last run — it is deliberately not bumped forward, so this entry shows for one more day and the site clears it tomorrow. Both ports have been open since 28 August and no source reports any new closure. The queue itself has not gone away: reporting through 8-9 September still describes 7-10 day berthing delays and no meaningful drop in vessel backlogs, and the 6 September Linerlytica snapshot has Shanghai/Ningbo at 239 ships and 1.41M TEU at anchorage with a queue-to-berth ratio of 2.92, the worst of the 18 tracked ports by a wide margin. That is now a congestion story rather than a weather story, which is why it is being handed back to the congestion panel rather than kept alive here. Note that once this entry clears, the site's own berths-idle flag is no longer suppressed for Shanghai/Ningbo — that is harmless here, since the berths are saturated, not idle.",
-   "source": "Kuehne+Nagel port operational update 2-8 Sep 2026; JMA targetTc feed (empty) 9 Sep 2026"
+   "note": "eventEnded is left at 8 September for the second run running — deliberately not bumped, per the expiry rule. Two days after that date is 10 September, so this is the entry's final scheduled display day and the site clears it on 11 September. Both ports have been open since 28 August and no source reports a new closure. The queue has not gone away: the 6 September Linerlytica snapshot still has Shanghai/Ningbo at 239 ships and 1.41M TEU at anchorage with a queue-to-berth ratio of 2.92, far and away the worst of the 18 tracked ports. Once this entry expires the congestion panel carries that story on its own, which is the intended handover.",
+   "source": "https://mykn.kuehne-nagel.com/news/article/port-operational-updates-from-08-09-2026"
   }
  },
  "remarks": [
-  "No active tropical cyclones in the JMA basin for a third straight run — nothing is threatening any tracked port right now.",
-  "No port in the tracked set is suspended. No new closure, strike or fog event surfaced at Kuehne+Nagel, SEKO or MSC.",
-  "The Shanghai/Ningbo weather entry is on its last legs: eventEnded is 8 September, so the site shows it today and clears it tomorrow. Its backlog has not cleared, but the storm that caused it is long gone, so the congestion figures now tell that story on their own.",
-  "Linerlytica has not published a snapshot since 6 September, so the congestion panel is three days behind. That is a source-side gap, not a fetch failure."
+  "No active tropical cyclones in the JMA basin for a fourth straight run — nothing is bearing down on any tracked port.",
+  "No tracked port is suspended. No new closure, strike or fog event surfaced at Kuehne+Nagel, SEKO, MSC or in web search.",
+  "The Shanghai/Ningbo entry reaches the end of its two-day expiry window today and drops off the page tomorrow. Its backlog has not cleared, but the storm behind it is long gone, so the congestion figures take over from here.",
+  "Both weather sources have gone quiet: SEKO has not been touched since 4 September and the next Kuehne+Nagel weekly is not due until 15 September. Nothing here is a fetch failure — the sources simply have nothing new to say.",
+  "Linerlytica has not published a congestion snapshot since 6 September, so the congestion panel is now four days behind. congestion.json was left untouched this run rather than rewritten with no new data."
  ]
 }
