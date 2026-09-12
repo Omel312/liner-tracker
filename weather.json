@@ -1,12 +1,11 @@
 {
-  "updated": "11 Sep 2026, 22:13 UTC — JMA active-cyclone feed + port/terminal advisories",
-  "asOf": "2026-09-11",
+  "updated": "12 Sep 2026, 22:14 UTC — JMA active-cyclone feed + port/terminal advisories",
+  "asOf": "2026-09-12",
   "sources": [
-    "JMA bosai typhoon feed (targetTc.json), read 11 Sep 2026 22:13 UTC. Empty array for the fifth consecutive run: no active tropical cyclones anywhere in the JMA basin. Typhoon Saudel (No. 2618) dissipated after its 3 September Fujian landfall and TC2628 Krovanh dropped out of active tracking on 8 September. With no analysis or forecast points to score, no threats are recorded this run. https://www.jma.go.jp/bosai/typhoon/data/targetTc.json",
-    "SEKO Asia-Pacific Logistics Monitoring Center, Week 37 update, last updated Friday 11 September 2026 12:00 HKT — refreshed for the first time since 4 September and now the freshest per-port source. Headline status: meteorological conditions calm, no active tropical cyclone systems tracked, all SEKO offices operational; post-typhoon congestion converging with the pre-Golden Week cargo rush, global anchorage congestion 4.04M TEU (11.7% of the cellular fleet), North Asia holding 43% of anchored tonnage. https://www.sekologistics.com/hk-en/resources/asia-supply-chain-weather-center-live-port-freight-updates/",
-    "MSC customer advisories, read 11 Sep 2026 via Chrome. No port-closure notice for any tracked port; the most recent posting is a 3 September piracy/Suez routing note. https://www.msc.com/en/newsroom/customer-advisories",
-    "Kuehne+Nagel weekly port operational update, 2-8 Sep 2026 — superseded this run by the fresher SEKO Week 37 figures. The next K+N weekly is due 15 Sep. https://mykn.kuehne-nagel.com/news/article/port-operational-updates-from-08-09-2026",
-    "Web search for new typhoon, fog, strike or emergency closures affecting tracked ports, 11 Sep 2026 — returned only August Typhoon Saudel coverage. Nothing new."
+    "JMA bosai typhoon feed (targetTc.json), read 12 Sep 2026 22:14 UTC. Returned an empty array for the sixth consecutive run: no active tropical cyclones anywhere in the JMA basin. Typhoon Saudel (No. 2618) dissipated after its 3 September Fujian landfall and TC2624 Krovanh dropped out of active tracking on 8 September. With no analysis or forecast points to score, no threats are recorded this run. https://www.jma.go.jp/bosai/typhoon/data/targetTc.json",
+    "SEKO Asia-Pacific Logistics Monitoring Center, Week 37 update, still stamped Friday 11 September 2026 12:00 HKT — unchanged since the previous run, so it carries no new information this time. Headline status: meteorological conditions calm, no active tropical cyclone systems tracked, all SEKO offices operational. Berth waits quoted: Shanghai WGQ5 8 days, WGQ2 7 days, Yangshan YS12 7 days; Ningbo Meishan MSICT 5 days, with gradual improvement projected into Week 38. Yard utilisation 76% Waigaoqiao, 86% Yangshan. Yantian 2-3 days for vessels over 330m LOA, 1.5-2 days otherwise. Qingdao fluid at 76% yard occupancy. Busan BNCT laden yard ~90%, reefer plugs tight, and a planned 24-hour Chuseok shutdown on 25-26 September. https://www.sekologistics.com/hk-en/resources/asia-supply-chain-weather-center-live-port-freight-updates/",
+    "Kuehne+Nagel weekly port operational update covering 2-8 September 2026, the most recent edition published (the next is due Monday 15 September). Seven-day average vessel waiting times: Shanghai 4.72 days, Ningbo 3.58 days, Yantian 2.45 days, Xiamen 1.07 days, Qingdao 1.16 days, Busan 1.09 days, Singapore 1.32 days, Haiphong 1.0 day, Ho Chi Minh City 1.0 day. All closures listed for these ports are historical Saudel shutdowns, already worked through. https://mykn.kuehne-nagel.com/news/article/port-operational-updates-from-08-09-2026",
+    "MSC customer advisories, read 12 Sep 2026 via Chrome. No port-closure or weather advisory has been posted for any tracked port; the newest items are commercial (Panama Canal surcharge 2 Sep, piracy/Suez routing 3 Sep, Golden Week sailing programmes 24-26 Aug). https://www.msc.com/en/newsroom/customer-advisories"
   ],
   "systems": [],
   "ports": {
@@ -14,20 +13,20 @@
       "status": "recovering",
       "event": "Fishing-season channel closures",
       "since": "11 Sep",
-      "eventEnded": null,
+      "eventEnded": "2026-09-12",
       "reportedWaitLo": 5,
       "reportedWaitHi": 8,
       "waitLabel": "Shanghai WGQ5 8 days, WGQ2 and Yangshan YS12 7 days; Ningbo Meishan MSICT 5 days — SEKO Week 37, 11 Sep 2026",
-      "note": "The Typhoon Saudel entry that sat here has expired and been replaced rather than carried forward: Saudel is long dissipated and its eventEnded of 8 September ran out. What is live now is a separate, sourced event. The opening of the seasonal coastal fishing window flooded the main navigation channels this week, shutting the Yangshan deepwater channel for 8.8 hours and the Ningbo main fairway for 4 hours. Both ports are open and working, so the status is recovering, not suspended. Berth waits are easing but still severe: Shanghai WGQ5 8 days, WGQ2 improved to 7, YS12 7, Ningbo MSICT down to 5, with SEKO projecting further gradual improvement into Week 38. Yard utilisation 76% at Waigaoqiao and 86% at Yangshan; Ningbo yard density elevated across all terminals with gate-in quotas and transshipment dwell controls strictly enforced.",
-      "source": "SEKO Asia-Pacific Logistics Monitoring Center, Week 37, 11 Sep 2026 — https://www.sekologistics.com/hk-en/resources/asia-supply-chain-weather-center-live-port-freight-updates/"
+      "note": "Closing this entry out. The seasonal fishing-fleet traffic that shut the Yangshan deepwater channel for 8.8 hours and the Ningbo main fairway for 4 hours was a Week 37 event and is over; no source has reported a fresh closure since, SEKO still describes conditions as calm, and both ports are open and working. eventEnded is set to 12 September so the site shows the entry for two more days and then drops it. What remains is congestion, not weather: berth waits of 7-8 days at Shanghai and 5 days at Ningbo are easing week on week, and Linerlytica already carries the queue at 1.41m TEU and a 2.9 queue-to-berth ratio. Once this entry expires the congestion data speaks for itself and the site resumes its own idle-berth flagging for this port, which is the intended handoff.",
+      "source": "SEKO Asia-Pacific Logistics Monitoring Center, Week 37, 11 Sep 2026; Kuehne+Nagel port operational update 2-8 Sep 2026"
     }
   },
   "remarks": [
-    "No active tropical cyclones in the JMA basin for a fifth straight run. Nothing is bearing down on any tracked port and no threat rows are scored this run.",
-    "No tracked port is suspended. The only operations-stopping events this week hit ports the tracker does not follow: gale-force winds closed Dalian for 32 hours and Lianyungang for 14.5 hours, both since reopened.",
-    "Shanghai/Ningbo is the one tracked port with a live entry, and the reason has changed. The storm story is over; the current disruption is seasonal fishing traffic closing the navigation channels, on top of a backlog that has not cleared.",
-    "Qingdao, Yantian, Busan and Singapore are all open and omitted. Yantian berth delays of 2-3 days for mega-vessels and Busan yard density near 90% are peak-season congestion, not weather, so the congestion panel is the right place to read them.",
-    "Busan terminals will halt for 24 hours from 25 to 26 September for Chuseok. Noted here rather than as a port entry because it is a scheduled holiday, not a disruption, and it would expire off the page long before it happens.",
-    "Linerlytica has not published a congestion snapshot since 6 September, so the congestion panel is now five days behind. congestion.json was left untouched again this run rather than rewritten with no new data."
+    "No active tropical cyclones in the JMA basin for the sixth run running. Nothing is bearing down on any tracked port, so there are no threat rows this week.",
+    "No new port closures, strikes or emergency suspensions anywhere in the tracked list. Every closure still showing up in the trade press is a historical Typhoon Saudel shutdown from late August and early September.",
+    "Both per-port sources are stale rather than clean: SEKO has not refreshed since 11 September and the Kuehne+Nagel weekly still covers 2-8 September. Nothing in either has changed since the last run.",
+    "Shanghai/Ningbo is being retired from this panel with eventEnded set to 12 September. The weather event is finished. The queue is not — 1.41m TEU at anchorage and a 2.9 queue-to-berth ratio on the 6 September snapshot — but that is congestion the main chart already shows.",
+    "Linerlytica has published nothing newer than 6 September, so the congestion history gained no dates this run. The snapshot behind every figure here is now six days old.",
+    "Worth watching rather than recording: Busan terminals plan a full 24-hour halt on 25-26 September for Chuseok, and China Golden Week runs 1-7 October. Both are scheduled, not disruptive, so neither gets a port entry."
   ]
 }
