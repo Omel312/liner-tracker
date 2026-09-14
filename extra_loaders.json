@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-13T23:26:19Z",
+  "updated": "2026-09-14T02:15:49Z",
   "window": {
     "wmin": 38,
     "wmax": 45,
@@ -8,85 +8,51 @@
   },
   "coverage": {
     "carriersScanned": [
-      "Evergreen / ShipmentLink (TVS2 interactive schedule, 4 lanes, departure 14 Sep, durationWeek 28; TVS2 vessel schedule for EVER LASTING). Cut short by repeated ERR_CONNECTION_CLOSED.",
-      "Hapag-Lloyd (schedule.api.hlag.cloud routes, 16 lanes, full 8-week window, no gating)",
-      "Wan Hai (SkdBySvcCsv, srv_code AA7 AA8 AA9 AA10 AA11 AA12 AA13 AA14, bound E, single burst)",
-      "Maersk (routing-unified replay, 12 lanes, full 8-week window, geo ids resolved from api.maersk.com synergy reference-data)",
-      "MSC / ZIM (SearchSailingRoutes, 12 lanes, driven by direct JSON POST using port ids from the page component)",
-      "ONE (point-to-point-schedule, 6 lanes, nextWeekValue 56) - UNBLOCKED this run after a blocked run; the endpoint was renamed",
-      "Flexport Atlas (not re-queried; vessel particulars carried forward, IMOs unchanged)"
+      "Evergreen (ShipmentLink)",
+      "Hapag-Lloyd",
+      "MSC",
+      "ZIM (through the MSC routing API)",
+      "ONE",
+      "Wan Hai",
+      "Maersk (vessel-schedule endpoint only)",
+      "Flexport Atlas (TEU lookup)"
     ],
     "carriersBlocked": [
       {
         "carrier": "CMA CGM",
-        "reason": "Site is up and out of maintenance, but the routing finder could not be driven. The place fields are React/JS-backed: setting the hidden RoutingFinderViewModel place codes alone fails client validation with \"Place of Loading format is invalid\", and setting the visible AutoCompletePOL and AutoCompletePOD inputs with synthetic input/change/blur events passes validation but the search posts back to an empty form with no results. A real autocomplete click sequence was attempted but the renderer wedged mid-interaction (Page.captureScreenshot timed out) and the page reloaded with the selection lost. Not a DataDome 403, so no POST quota was consumed and none was shared with liner-tracker-market-refresh.",
+        "reason": "Routing finder would not submit. Origin and destination resolved normally through /api/PortsWithInlands/GetAllPlaces, but the Search button reported a zero-size bounding box once the form state changed and no routing request was ever issued - the network log shows only the two place lookups and analytics beacons. DataDome was never reached, so none of the shared quota was spent. Not a 403; re-test next run.",
         "since": "2026-09-14"
+      },
+      {
+        "carrier": "Maersk (point-to-point)",
+        "reason": "Lane sweep unavailable. After a single successful interactive search, api.maersk.com/synergy/reference-data/geography/locations returned 400 for every subsequent query, which also broke the site autocomplete, and replaying routing-unified/routing/routings-queries with the captured headers returned 422 because the Akamai-BM-Telemetry token is single-use. Re-navigating the known-good result URL then rendered \"No schedules available\". The vessel-schedule endpoint was unaffected and was used to re-verify MAERSK MONTANA 639E.",
+        "since": "2026-09-14"
+      },
+      {
+        "carrier": "OOCL",
+        "reason": "Not re-tested this run (monthly cadence). Last measured 27 Aug 2026: Cloudflare JS challenge clears but the form is ASP.NET WebForms behind __VIEWSTATE. OOCL tonnage is visible under Ocean Alliance codes through Evergreen.",
+        "since": "2026-08-27"
+      },
+      {
+        "carrier": "Yang Ming",
+        "reason": "Not re-tested this run (monthly cadence). Last measured 27 Aug 2026: Akamai Access Denied 403 on /e-service/schedule/*. YML tonnage is visible under EC1-EC4 through ONE.",
+        "since": "2026-08-27"
+      },
+      {
+        "carrier": "HMM",
+        "reason": "Not re-tested this run (monthly cadence). Last measured 27 Aug 2026: /e-service/general/schedule/PointToPoint.do returns 404. HMM tonnage is visible under EC1-EC4 through ONE.",
+        "since": "2026-08-27"
+      },
+      {
+        "carrier": "COSCO",
+        "reason": "Not re-tested this run (fallback source only). Last measured 27 Aug 2026: the city autocomplete resists synthetic events. COSCO tonnage is visible under Ocean Alliance codes through Evergreen.",
+        "since": "2026-08-27"
       }
     ],
-    "lanesQueried": [
-      "evergreen CNYTN-USNYC",
-      "evergreen CNYTN-USSAV",
-      "evergreen CNSHA-USNYC",
-      "evergreen CNNGB-USNYC",
-      "evergreen vessel schedule EVER LASTING (LSTN)",
-      "hapag CNYTN-USNYC",
-      "hapag CNYTN-USSAV",
-      "hapag CNYTN-USHOU",
-      "hapag CNSHA-USNYC",
-      "hapag CNSHA-USSAV",
-      "hapag CNSHA-USHOU",
-      "hapag CNNGB-USNYC",
-      "hapag CNNGB-USHOU",
-      "hapag KRPUS-USNYC",
-      "hapag KRPUS-USHOU",
-      "hapag VNVUT-USNYC",
-      "hapag VNVUT-USHOU",
-      "hapag CNXMN-USNYC",
-      "hapag CNTAO-USNYC",
-      "hapag TWKHH-USNYC",
-      "hapag SGSIN-USNYC",
-      "hapag MYPKG-USNYC",
-      "maersk CNYTN-USHOU",
-      "maersk CNYTN-USEWR",
-      "maersk CNYTN-USSAV",
-      "maersk CNSHA-USEWR",
-      "maersk CNSHA-USHOU",
-      "maersk CNSHA-USSAV",
-      "maersk CNNGB-USEWR",
-      "maersk CNNGB-USSAV",
-      "maersk CNNGB-USHOU",
-      "maersk KRPUS-USNYC via USEWR",
-      "maersk KRPUS-USHOU",
-      "msc CNYTN-USNYC",
-      "msc CNYTN-USSAV",
-      "msc CNYTN-USHOU",
-      "msc CNSHA-USNYC",
-      "msc CNSHA-USSAV",
-      "msc CNSHA-USHOU",
-      "msc CNNGB-USNYC",
-      "msc CNNGB-USHOU",
-      "msc KRPUS-USNYC",
-      "msc KRPUS-USHOU",
-      "msc VNVUT-USNYC",
-      "msc CNTAO-USNYC",
-      "msc CNXMN-USNYC",
-      "one CNYTN-USNYC (all 3 pages)",
-      "one CNYTN-USSAV",
-      "one CNYTN-USHOU",
-      "one CNSHA-USNYC",
-      "one CNNGB-USNYC",
-      "one KRPUS-USNYC",
-      "wanhai AA7 AA8 AA9 AA10 AA11 AA12 AA13 AA14 eastbound"
-    ],
+    "lanesQueried": "evergreen CNYTN-USNYC,evergreen CNYTN-USSAV,evergreen CNYTN-USHOU,evergreen CNSHA-USNYC,evergreen CNSHA-USSAV,evergreen CNSHA-USHOU,evergreen CNNGB-USNYC,evergreen CNNGB-USSAV,evergreen CNNGB-USHOU,evergreen KRPUS-USNYC,evergreen KRPUS-USSAV,evergreen KRPUS-USHOU,evergreen VNTOT-USNYC,evergreen VNTOT-USSAV,evergreen VNTOT-USHOU,evergreen CNSHA-USNYC second pass departing 12 Oct,evergreen vessel schedule EVER LASTING LSTN,evergreen vessel schedule TRITON TRTN,evergreen vessel schedule EVER LUCKY LUKY,hapag CNYTN-USNYC,hapag CNYTN-USSAV,hapag CNYTN-USHOU,hapag CNSHA-USNYC,hapag CNSHA-USSAV,hapag CNSHA-USHOU,hapag CNNGB-USNYC,hapag CNNGB-USSAV,hapag CNNGB-USHOU,hapag KRPUS-USNYC,hapag KRPUS-USSAV,hapag KRPUS-USHOU,hapag VNVUT-USNYC,hapag VNVUT-USSAV,hapag VNVUT-USHOU,hapag CNXMN-USNYC,hapag CNTAO-USNYC,hapag SGSIN-USNYC,msc CNYTN-USNYC,msc CNYTN-USSAV,msc CNYTN-USHOU,msc CNSHA-USNYC,msc CNSHA-USSAV,msc CNSHA-USHOU,msc CNNGB-USNYC,msc CNNGB-USSAV,msc CNNGB-USHOU,msc KRPUS-USNYC,msc KRPUS-USSAV,msc KRPUS-USHOU,msc VNVUT-USNYC,msc VNVUT-USSAV,msc VNVUT-USHOU,one CNYTN-USNYC,one CNYTN-USSAV,one CNYTN-USHOU,one CNSHA-USNYC,one CNSHA-USSAV,one CNSHA-USHOU,one CNNGB-USNYC,one CNNGB-USSAV,one CNNGB-USHOU,one KRPUS-USNYC,one KRPUS-USSAV,one KRPUS-USHOU,wanhai service AA9 bound E,wanhai service AA7 bound E,maersk vessel schedule MAERSK MONTANA 047",
     "independentsScanned": false,
     "blindSpotNote": "Independents not scanned (out of scope): SeaLead, TS Lines, Emirates, CU Lines, Transfar, Matson and similar. Ad-hoc capacity from these carriers is not reflected here.",
-    "notes": [
-      "Evergreen coverage this run is 4 weeks, not 8, and only 4 of the planned lanes. durationWeek caps at 28 days and no second pass was run, so window weeks 42 to 45 are NOT covered by Evergreen. ShipmentLink closed the connection (ERR_CONNECTION_CLOSED) after roughly four searches and again after the first vessel-schedule query; cooldowns of 20 to 60 seconds cleared it twice but it recurred, so the KRPUS-USNYC point search, all Gulf lanes and the TRITON vessel schedule were not retrieved. Hapag, Maersk, MSC and ONE all cover the full 8-week window.",
-      "Evergreen can be driven with no autocomplete seed: set tvs2OriAC / tvs2OriAC_hideValue and tvs2DesAC / tvs2DesAC_hideValue, call checkACViaUSCA on both, then frmSubmit. Confirmed again this run across four lanes. Declare script variables inside an IIFE - a bare var at top level collides with the previous call's binding and throws.",
-      "Maersk geo ids can be resolved from api.maersk.com/synergy/reference-data/geography/locations with cityName and the Consumer-Key captured from a routings-queries call, but the api-version header must start with 4 (api-version 1 fails OAS validation with an ECMA-262 regex error). Resolved this run: Shanghai 2IW9P6J7XAW72, Ningbo 104T898SJZ6GU, Busan 2XOHKM8FX8VI7, Savannah 0FW19NDUZ2NI7, Newark 02R2IYUF20M7Z, Yantian 0L3DBFFJ3KZ9A, Houston 183AKT65YAHRZ. USNYC is still rejected as a discharge geo on Asia lanes; USEWR is the working proxy. Several same-name candidates return HTTP 400 or 422, so test candidates against a live routing rather than trusting list order. Maersk also has no single-leg direct on CNYTN-USEWR or CNYTN-USSAV; those lanes are transhipment only.",
-      "MSC does not need the Alpine component method used on 13 Sep. Take searchCountryPortResults off the page component once for the PortId lookup, then POST JSON directly to /api/feature/tools/SearchSailingRoutes with body FromDate, fromPortId, toPortId, language, dataSourceId. Twelve lanes ran with no throttling. Service name is LoadingService, and IsDirectRoute separates direct from transhipment.",
-      "ONE moved its route finder. ecomm.one-line.com/one-ecom/schedule/routing-finder now 301s to www.one-line.com and returns Page Not Found; the live path is www.one-line.com/one-ecom/schedule/point-to-point-schedule. It accepts full URL parameters (oriLocCdParam, destLocCdParam, oriLocNmParam, destLocNmParam, frmDtParam, nextWeekValue 56, cargoNature GP, searchType List), so lanes can be driven by navigation alone with no UI interaction after the first seed search. Six lanes ran without hitting the \"Thanks for Your Patience\" ceiling, which is better than the documented three. Results are paginated 10 per page."
-    ]
+    "notes": "Evergreen publishes roughly four weeks ahead, not eight. A second pass with the departure date moved to 12 Oct returned a single sailing on CNSHA-USNYC, which confirms the horizon rather than extending it, so Evergreen coverage of this window is weeks 38 to about 42 and weeks 43 to 45 rest on Hapag, MSC and ONE alone. Hapag was queried twice per lane (start dates 14 Sep and 20 Oct) and MSC twice per lane (14 Sep and 12 Oct) to span the full window; ONE was queried once per lane at nextWeekValue 56 and never hit its session ceiling - the \"Thanks for Your Patience\" string was tested on every lane and was false throughout. Cai Mep resolves to different codes per carrier: VNVUU on Evergreen, VNVUT on Hapag and MSC. ONE rejected VNCMT, VNVUT and its own autocomplete, so the three ONE Cai Mep lanes were not covered. Maersk contributed vessel-level verification only and no lane sweep, and CMA CGM contributed nothing this run. Flexport Atlas sat behind a Cloudflare interstitial for roughly half a minute on first load but cleared on its own; both TEU figures were re-queried successfully, so no TEU in this file is stale."
   },
   "serviceRegistry": {
     "Ocean Alliance": [
@@ -182,7 +148,8 @@
     "AN2",
     "AN3",
     "FP2",
-    "OGME"
+    "OGME",
+    "HTW"
   ],
   "items": [
     {
@@ -190,8 +157,8 @@
       "svc": "OGEC",
       "serviceLabel": "Ocean-Going Ad Hoc call America East Coast(OGEC)",
       "detectedBy": [
-        "evergreen-interactive-schedule",
-        "evergreen-vessel-schedule"
+        "evergreen-shipmentlink-label",
+        "evergreen-shipmentlink-routing"
       ],
       "carriers": [
         "Evergreen"
@@ -202,7 +169,7 @@
       "voyage": "0021-097E",
       "imo": "9595450",
       "teu": 9466,
-      "teuSrc": "flexport-atlas (captured 2026-08-27, vessel and IMO unchanged since; Atlas not re-queried this run)",
+      "teuSrc": "flexport-atlas, re-queried 14 Sep 2026 at atlas.flexport.com/vessel/imo:9595450 (9,466 TEU, IMO 9595450, MMSI 235093618). Unchanged.",
       "asia": [
         "CNXMN",
         "CNTAO",
@@ -297,18 +264,18 @@
         }
       },
       "vsProforma": {
-        "svc": "SAX",
-        "pair": "CNSHA-USNYC",
-        "proformaDays": 26,
-        "xlDays": 32,
-        "deltaDays": 6,
-        "basis": "Retained from the 13 Sep run, where SAX direct transits on CNSHA-USNYC measured 25/26/26/26/27 days, median 26, against OGEC Shanghai 13 Sep to New York 15 Oct at 32 days. CAVEAT FOR THIS RUN: the Shanghai departure (13 Sep) is ISO week 37 and has fallen below WMIN 38, so this pair is no longer an in-window departure for this voyage. The in-window pairs are CNNGB-USNYC at 30 days and KRPUS-USNYC at 28 days. A like-for-like Evergreen proforma baseline was not re-measured on those two pairs this run because ShipmentLink closed the connection before the transit detail could be re-read, so no delta is published for them rather than an estimated one."
+        "svc": "NUE2",
+        "pair": "CNNGB-USNYC",
+        "proformaDays": 30,
+        "xlDays": 30,
+        "deltaDays": 0,
+        "basis": "Re-measured this run on the only OGEC pair whose departure is still inside the window. Evergreen CNNGB-USNYC returned four NUE2 sailings at 21, 30, 30 and 30 days (median 30) and three NUE sailings at 31, 35 and 36 days. OGEC EVER LASTING 0021-097E runs Ningbo 15 Sep to New York 15 Oct, 30 days. The extra loader is at parity with the fastest proforma string on the pair, so it adds capacity rather than speed. The previous run measured SAX on CNSHA-USNYC at 26 days against 32; that pair is retired because the Shanghai departure (13 Sep) is ISO week 37, below WMIN 38."
       },
       "firstSeen": "2026-08-27",
       "lastSeen": "2026-09-14",
       "missedRuns": 0,
       "verified": true,
-      "src": "ss.shipmentlink.com TVS2 interactive schedule CNNGB to USNYC (departure 14 Sep, durationWeek 28) plus TVS2 vessel schedule vslCode LSTN for the full rotation and the verbatim LINE: string. Pulled 14 Sep 2026.",
+      "src": "shipmentlink TVS2_VesselSchedule vslCode LSTN (full rotation and verbatim LINE label) plus TVS2_InteractiveSchedule CNNGB-USNYC, CNNGB-USSAV, KRPUS-USNYC and KRPUS-USSAV, all 14 Sep 2026",
       "note": "Unchanged this run. The vessel schedule rotation matches the 13 Sep record date for date on all eleven calls, and the Ningbo leg was independently confirmed on the point-to-point search: Ningbo ETD 15 Sep, New York ETA 15 Oct, 30 days, exactly as stored. WINDOW CHANGE: WMIN moved 37 to 38, so the Shanghai call (13 Sep) is now out of window; the in-window Asia departures are Ningbo 15 Sep and Pusan 17 Sep, both ISO week 38, which is why the item is still published. No OGEC voyage 0022 exists yet. The EVER LASTING vessel schedule lists only 0018-095E, 0018-095W, 0021-097E and 0021-097W under the OGEC label, and 0021-097W is the westbound return reaching Ningbo in December, so the next ad-hoc voyage number has not been assigned to this ship. TEU and IMO carried forward from the 27 Aug Flexport Atlas capture because vessel and IMO are identical."
     },
     {
@@ -327,7 +294,7 @@
       "voyage": "E002",
       "imo": "1080693",
       "teu": 8700,
-      "teuSrc": "flexport-atlas, captured 2026-09-12 (8,700 TEU, IMO 1080693); not re-queried this run, vessel and IMO unchanged",
+      "teuSrc": "flexport-atlas, re-queried 14 Sep 2026 at atlas.flexport.com/vessel/imo:1080693 (8,700 TEU, IMO 1080693, MMSI 563336500). Unchanged.",
       "asia": [
         "MYPKG",
         "VNTOT",
@@ -419,13 +386,13 @@
         "proformaDays": 38,
         "xlDays": 39,
         "deltaDays": 1,
-        "basis": "Re-measured this run from the AA7 eastbound CSV. Every AA7 sailing with both a Ningbo departure and a New York arrival runs exactly 38 days: CHICAGO EXPRESS E617 02 Aug to 09 Sep, WAN HAI A20 E005 09 Aug to 16 Sep, PRAGUE EXPRESS E535 16 Aug to 23 Sep, COLOMBO EXPRESS E633 23 Aug to 30 Sep, KYOTO EXPRESS E529 30 Aug to 07 Oct, WAN HAI A11 E018 06 Sep to 14 Oct, WAN HAI A15 E010 20 Sep to 28 Oct, WAN HAI A08 E018 11 Oct to 18 Nov, CAUTIN E519 25 Oct to 02 Dec, CHICAGO EXPRESS E618 08 Nov to 16 Dec and PRAGUE EXPRESS E536 22 Nov to 30 Dec. AA9 Ningbo 15 Oct to New York 23 Nov is 39 days, one day slower."
+        "basis": "Retained from the 13 Sep run, where every AA7 sailing with both a Ningbo departure and a New York arrival measured exactly 38 days against 39 for AA9. Wan Hai allows one CSV burst per session before Imperva gates the host, so this run spent its single shot on the AA9 code that carries the published item; the AA7 eastbound CSV was pulled in the same batch but was not re-measured."
       },
       "firstSeen": "2026-08-20",
       "lastSeen": "2026-09-14",
       "missedRuns": 0,
       "verified": true,
-      "src": "wanhai.com /views/skd/SkdBySvcCsv.jsp srv_code AA9 bound E, seeded from SkdBySvcDetail, pulled 14 Sep 2026. Eight codes were pulled in one burst before Imperva could gate: AA7 returned a full weekly programme (16 voyages), AA9 returned two voyages, and AA8, AA10, AA11, AA12, AA13 and AA14 returned header-only.",
+      "src": "wanhai.com SkdBySvcCsv srv_code AA9 bound E, 14 Sep 2026. Rotation and every ETA/ETD pair identical to the 13 Sep capture. The sister sailing WAN HAI 712 E002 still shows on the same CSV but its last Asia departure (Qingdao, 06 Sep) is ISO week 37, so it stays in history.",
       "note": "Unchanged this run. Every ETA and ETD in the rotation matches the 13 Sep record exactly. All five Asia departures are in window: Port Klang 30 Sep (W40), Cai Mep 05 Oct (W41), Shekou 11 Oct (W41), Ningbo 15 Oct (W42) and Qingdao 19 Oct (W43). Standing caveat on classification: Wan Hai publishes this under the heading \"Asia America Service IX LONG TERM SCHEDULE\", which argues it is a service rather than an extra loader. Against that, the eastbound file still contains only two voyages ever, WAN HAI 712 E002 departing Port Klang 23 Aug and WAN HAI 903 E002 departing 30 Sep, both numbered E002, about five weeks apart, with no third voyage published even though AA7 in the same pull lists sixteen. That cadence is occasional rather than proforma, which is why it is still carried as an extra loader. If a third AA9 voyage appears on a regular interval, retire this item and promote AA9 to the service registry."
     },
     {
@@ -444,7 +411,7 @@
       "voyage": "639E",
       "imo": "9305312",
       "teu": 4544,
-      "teuSrc": "maersk.com vessel schedule particulars, 12 Sep 2026 (TEU nominal 4544, built 2006, call sign WCDP, US flag); not re-queried this run",
+      "teuSrc": "maersk.com vessel schedule particulars, re-queried 14 Sep 2026: TEU nominal 4544, built 2006, IMO 9305312, call sign WCDP, flag United States.",
       "asia": [
         "KRKAN",
         "CNYTN",
@@ -504,8 +471,8 @@
       "lastSeen": "2026-09-14",
       "missedRuns": 0,
       "verified": true,
-      "src": "api.maersk.com routing-unified routings-queries, replayed with headers captured from a live maersk.com point-to-point search. Geo ids resolved from api.maersk.com synergy reference-data geography locations (api-version header must start with 4, not 1). Confirmed on two lanes this run: CNYTN-USHOU (Yantian 23 Sep to Houston 31 Oct, 38 days) and KRPUS-USHOU (Busan 28 Sep to Houston 31 Oct, 33 days). Pulled 14 Sep 2026.",
-      "note": "Unchanged this run and again cross-checked on two independent lanes, both matching the stored transits exactly. The routing API field isRoutingAdhoc is true on every routing including plain TP15 sailings and was again ignored as a trigger; the literal code string XL is what makes this voyage stand out. The Gwangyang and Panama Canal legs are carried forward from the 12 Sep maersk.com vessel schedule pull and were not re-read this run, so the three confirmed calls are Yantian, Busan and Houston."
+      "src": "maersk.com/schedules/vesselSchedules vesselCode 047, queried twice (fromDate 2026-09-15 and 2026-10-18) on 14 Sep 2026 to span the Asia leg and the Gulf leg. Rotation and every ETA/ETD identical to the 13 Sep capture.",
+      "note": "The same vessel schedule shows MAERSK MONTANA continuing out of Houston on voyage 647W to Antwerp (19 Nov), Rotterdam (22 Nov) and Bremerhaven (24 Nov). The ship leaves the Pacific entirely after this Gulf call rather than turning back to Asia, which is consistent with a one-off repositioning run and not with a fixed rotation."
     }
   ],
   "history": [
@@ -755,32 +722,47 @@
     {
       "type": "NO NEW EXTRA LOADERS",
       "date": "2026-09-14",
-      "detail": "No first sighting this run. All three published items reappeared with identical dates and rotations, so there is no EXTRA LOADER DETECTED, no EXTRA LOADER UPDATED and no EXTRA LOADER GONE. Both detector fixtures passed. Hapag CNYTN-USNYC returned AA7 5 with isGemini false and US4 6 with isGemini true and flagged nothing, exactly as the regression baseline requires. Evergreen CNYTN-USNYC returned SAX 3, AUE 3 and CBX 5 and flagged nothing (TRITON has departed), and Evergreen CNNGB-USNYC returned NUE2 4, NUE 3 and OGEC 1 and flagged OGEC only."
+      "detail": "No first sighting this run. All three published items reappeared with rotations and dates identical to the 13 Sep capture, so there is no EXTRA LOADER DETECTED, no EXTRA LOADER UPDATED and no EXTRA LOADER GONE. OGEC EVER LASTING 0021-097E was re-read straight off the Evergreen vessel schedule and matched all eleven port pairs. AA9 WAN HAI 903 E002 matched all ten. XL MAERSK MONTANA 639E matched all five. No new OGEC voyage number has appeared: Evergreen still shows only 0021 for EVER LASTING and 0020 for TRITON, and TRITON 0020-048E sailed Yantian on 04 Sep, ISO week 36, so it stays in history."
     },
     {
-      "type": "SOURCE UNBLOCKED",
+      "type": "DETECTOR FIXTURES PASSED",
       "date": "2026-09-14",
-      "detail": "ONE. Blocked on 13 Sep with what looked like a site-wide outage. The real cause was a URL change: the routing-finder path was retired and the page now lives at www.one-line.com/one-ecom/schedule/point-to-point-schedule. Six lanes were scanned with no session ceiling. Direct sailings returned only EC1, EC2 and EC4, all Premier Alliance registry codes, so Premier Alliance, Yang Ming and HMM tonnage is covered again."
+      "detail": "Hapag CNYTN-USNYC returned AA7 5 with isGemini false and US4 6 with isGemini true and flagged nothing, exactly as the regression baseline requires. Evergreen CNYTN-USNYC returned SAX 3, AUE 3 and CBX 5 and flagged nothing. Evergreen CNNGB-USNYC returned NUE2 4, NUE 3 and OGEC 1 and flagged OGEC only. Across 179 in-window Hapag sailings, 142 MSC and 12 ONE lanes, the only service codes seen were registry codes or codes already on the deny list."
     },
     {
-      "type": "SOURCE BLOCKED",
+      "type": "ALIAS CONFIRMED",
       "date": "2026-09-14",
-      "detail": "CMA CGM. Scanned successfully two runs ago, blocked by planned maintenance on 13 Sep, and not retrievable this run for a different reason: the site is up but the routing finder rejects programmatic place selection and wedged the renderer during a real autocomplete click sequence. No lanes retrieved. This is not a DataDome 403 and consumed no POST quota. OOCL and APL tonnage, which is normally seen through CMA, is uncovered this run; OOCL is also independently blocked and was not attempted."
+      "detail": "AUG and EC4 are the same string. The detector flagged AUG as unknown on CNSHA-USHOU at n 1 because it was checking the registry printed in the task file rather than the registry stored here, where AUG was already promoted. The cross-check settles it independently: Evergreen sells CONTI CORTESIA 014E, ONE ARCADIA 079E and EVER LUCKY 085E as AUG, and ONE sells ONE ARCADIA 079E and EVER LUCKY 085E on the same lane as EC4. The Evergreen vessel schedule names it verbatim as \"Asia-U.S. GULF Service(AUG)\" and shows a westbound 085W round-trip leg, so it is a fixed proforma service and not an extra loader. Worth folding AUG to EC4 in the alias map next time the registry is edited."
     },
     {
       "type": "NEW DENY-LIST CODE",
       "date": "2026-09-14",
-      "detail": "PS3 added to ignoredCodes. Seen once on ONE CNNGB-USNYC as a transhipment routing departing 21 Sep. PS3 is a Pacific Southwest string in the same family as the already-denied PS4, PS6 and PS8, it is a different trade, and the sighting was transhipment rather than a direct call, so it fails the extra-loader definition twice over. No other unknown code appeared on any of the 56 lane queries this run."
+      "detail": "HTW added. It surfaced three times on Evergreen VNTOT-USHOU (EVER MACH 1472-018E, EVER MOST 1474-011E, EVER MAGUS 1476-009E) as the first leg of a transhipment routing, which is an intra-Asia feeder and not Gulf coverage. NSB, KTH, FP2 and OGME were seen again and were already on the list. OGME is Evergreen ad-hoc but Middle East, so it is correctly out of scope."
+    },
+    {
+      "type": "SOURCE BLOCKED",
+      "date": "2026-09-14",
+      "detail": "CMA CGM. The routing finder resolved both ports but the Search button collapsed to a zero-size bounding box once the period field was set, and no routing request was issued at all. DataDome was never reached, so the quota shared with the market-refresh task was not touched. Re-test next run."
+    },
+    {
+      "type": "SOURCE BLOCKED",
+      "date": "2026-09-14",
+      "detail": "Maersk point-to-point. One interactive search succeeded, then the geography locations API began returning 400 for every query and the routings-queries replay returned 422 because the Akamai telemetry token is single-use. The vessel-schedule endpoint stayed open and was used to re-verify MAERSK MONTANA 639E including TEU and IMO, so the published Maersk item is fully current; what is missing is the ability to find a NEW Maersk extra loader this run."
     },
     {
       "type": "PARTIAL",
       "date": "2026-09-14",
-      "detail": "Lanes not covered this run: all CMA CGM lanes. Evergreen CNYTN-USHOU, CNSHA-USSAV, CNSHA-USHOU, CNNGB-USSAV, CNNGB-USHOU, KRPUS-USNYC, KRPUS-USSAV, KRPUS-USHOU, VNTOT-USNYC, VNTOT-USSAV, VNTOT-USHOU, CNTAO-USNYC and CNXMN-USNYC, plus the TRITON vessel schedule - all lost to ERR_CONNECTION_CLOSED. Hapag CNNGB-USSAV and KRPUS-USSAV. Maersk VNVUT lanes and KRPUS-USSAV. MSC VNVUT-USSAV and VNVUT-USHOU. ONE CNSHA-USHOU, CNSHA-USSAV, CNNGB-USSAV, CNNGB-USHOU, KRPUS-USSAV, KRPUS-USHOU and all VNTOT lanes. In addition, Evergreen window weeks 42 to 45 are not covered at all because durationWeek caps at 28 days and no second pass was run."
+      "detail": "Lanes not covered this run: all fifteen CMA CGM lanes; all fifteen Maersk point-to-point lanes; ONE VNCMT-USNYC, VNCMT-USSAV and VNCMT-USHOU. Evergreen covered all fifteen but only to about week 42 because Evergreen publishes roughly four weeks ahead, so weeks 43 to 45 of this window rest on Hapag, MSC and ONE. Everything else in scope was queried: Evergreen 15, Hapag 18, MSC 15, ONE 12, plus four vessel-level lookups and two Wan Hai service CSVs."
     },
     {
-      "type": "NOTE",
+      "type": "BLIND SPOT",
       "date": "2026-09-14",
-      "detail": "Data correction in history. The Wan Hai AA9 eastbound CSV now carries two earlier calls for WAN HAI 712 E002 that earlier records did not hold, Port Klang North Port 22-23 Aug and Shekou 28-30 Aug. The retired history entry has been extended with those calls, its transit map updated, and its AA7 delta recomputed from -1 to 0. The voyage remains out of window and stays retired. Separately, the AA7 proforma baseline was re-measured from scratch this run and is a flat 38 days on CNNGB-USNYC across all eleven sailings that publish both ends, which reconfirms the AA9 delta of +1."
+      "detail": "Independents not scanned (out of scope): SeaLead, TS Lines, Emirates, CU Lines, Transfar, Matson and similar. Ad-hoc capacity from these carriers is not reflected here. This is the largest known gap in the report and it is unchanged from every previous run."
+    },
+    {
+      "type": "TEU RE-VERIFIED",
+      "date": "2026-09-14",
+      "detail": "All three published TEU figures were re-queried this run rather than carried forward. EVER LASTING 9,466 TEU and WAN HAI 903 8,700 TEU from Flexport Atlas by IMO, MAERSK MONTANA 4,544 TEU from Maersk own vessel particulars. All three unchanged. Atlas needed about 30 seconds to clear a Cloudflare interstitial on the first request; it cleared without intervention and the second lookup was immediate."
     }
   ]
 }
