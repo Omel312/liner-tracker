@@ -1,28 +1,28 @@
 {
-  "updated": "21 Sep 2026, 00:06 UTC — JMA active-cyclone feed + port/terminal advisories",
-  "asOf": "2026-09-21",
-  "sources": [
-    "JMA bosai typhoon feed (targetTc.json + specifications.json), read 21 Sep 2026, 00:05 UTC — advisory issued 21 Sep 08:45 JST. One active system in the basin: TC2630 / typhoon number 2625, Dujuan, upgraded from severe tropical storm to typhoon since the 17 September read. Analysed at 32.3N 138.3E, about 170 km west-southwest of Hachijojima, 965 hPa, 70 kt sustained with 100 kt gusts, moving north-northeast at 20 km/h. All ten analysis and forecast points out to +43h were scored against the nine Asian port coordinates by great-circle distance. Closest approach to any tracked port is 911 km (Busan, at the current position — the track moves away thereafter); Shanghai/Ningbo 1,583 km, Qingdao 1,711 km, Xiamen 2,157 km, Shenzhen (Yantian) 2,629 km. Nothing comes inside the 600 km threat radius, so no threat rows are recorded. https://www.jma.go.jp/bosai/typhoon/data/targetTc.json",
-    "SEKO Asia-Pacific Logistics Monitoring Center, Week 37 update, last updated Friday 11 September 2026 12:00 HKT — ten days stale at time of reading. Header status reads METEOROLOGICAL CONDITIONS CALM with no active tropical cyclone systems tracked across the Western Pacific, East China Sea or South China Sea. No tracked port is suspended. The only closures it reports are seasonal and ordinary: 8.8 hours of navigation-channel closure at Shanghai Yangshan and 4 hours at Ningbo from the opening of the coastal fishing window, plus 32 hours at Dalian and 14.5 hours at Lianyungang from gale-force winds — neither Dalian nor Lianyungang is a tracked port. Qingdao is described as fluid at 76% yard occupancy with no significant congestion. https://www.sekologistics.com/hk-en/resources/asia-supply-chain-weather-center-live-port-freight-updates/",
-    "MSC customer advisories, checked 21 Sep 2026 — most recent postings are dated 14 September and cover Golden Week sailing programmes, a Red Sea service resumption and an equipment repositioning charge. No port-closure or terminal-suspension notice for any tracked port. https://www.msc.com/en/newsroom/customer-advisories",
-    "Kuehne+Nagel weekly port operational update — the most recent published edition is still the 2-8 September issue; 14 through 22 September URLs all return 404, so no fresher per-port waiting-time series was available this run. https://mykn.kuehne-nagel.com/news/article/port-operational-updates-from-08-09-2026"
-  ],
-  "systems": [
-    {
-      "name": "Dujuan",
-      "cat": "TY",
-      "pos": [
-        32.3,
-        138.3
-      ],
-      "threats": []
-    }
-  ],
-  "ports": {},
-  "remarks": [
-    "No tracked port carries a weather or closure entry this run. Nothing in the set is suspended, and the one active cyclone in the basin stays about 900 km clear of the nearest of them.",
-    "Dujuan has strengthened from severe tropical storm to typhoon since the 17 September read, but it is a Japan story rather than a container-port one. It is passing Hachijojima and running north-northeast into open water off the Kanto coast; ferry services to the Izu islands and some Hachijojima flights are cancelled, and a cruise ship is being held in Tokyo. Its closest approach to any tracked port is 911 km at Busan, at the current analysis position, and the forecast track only widens that gap. No threat rows are written.",
-    "The queues at Shanghai, Ningbo and Yantian are no longer a weather event and are deliberately left out of the port list. Saudel and Krovanh dissipated in early September; what remains is backlog converging with the pre-Golden Week export rush. The congestion series speaks for that on its own.",
-    "Linerlytica has not published a new congestion snapshot since 13 September. The API still answers for later dates but returns the 13 September figures under them, so the stored history was left untouched this run rather than padded with repeats."
-  ]
+ "updated": "21 Sep 2026, 22:14 UTC — JMA active-cyclone feed + port/terminal advisories",
+ "asOf": "2026-09-21",
+ "sources": [
+  "JMA bosai typhoon feed (targetTc.json + specifications.json), read 21 Sep 2026, 22:14 UTC — advisory issued 21 Sep 2026 21:45 UTC / 22 Sep 06:45 JST. One active system in the basin: TC2630 / typhoon number 2625, Dujuan, still classified TY. Analysed at 37.2N 145.9E, 970 hPa, 65 kt sustained with 95 kt gusts, moving northeast at 45 km/h. All three analysis and forecast points out to +24h were scored against the nine Asian port coordinates by great-circle distance. Closest approach to any tracked port is 1,530 km (Busan, at the current position); Qingdao 2,289 km, Shanghai/Ningbo 2,346 km, Xiamen 2,995 km, Shenzhen (Yantian) 3,463 km. The gap has widened from 911 km at the 21 September read — the system is running away to the northeast into the open Pacific. Nothing is inside the 600 km threat radius, so no threat rows are recorded. https://www.jma.go.jp/bosai/typhoon/",
+  "SEKO Asia-Pacific Logistics Monitoring Center, read 21 Sep 2026, 22:14 UTC — page last updated Friday 11 September 2026 12:00 HKT, so eleven days stale at this read and treated as background rather than current status. Its headline is METEOROLOGICAL CONDITIONS CALM with no active tropical cyclone tracked in the Western Pacific, East China Sea or South China Sea, and no tracked port suspended. What it reports instead is post-typhoon backlog converging with the pre-Golden Week rush: Shanghai berth waits of 7 days at Waigaoqiao Phase II and Yangshan YS12 and 8 days at WGQ5, Ningbo Meishan down to 5 days, Yantian 2-3 days for vessels over 330m LOA and 1.5-2 days otherwise, Singapore 1.5-2 days, Qingdao fluid with no significant congestion. The only stoppages it lists are outside the tracked set (Dalian 32 hours and Lianyungang 14.5 hours on gale-force winds) or are short fishing-season channel closures (8.8 hours at Yangshan, 4 hours at Ningbo) that predate the current congestion window. https://www.sekologistics.com/hk-en/resources/asia-supply-chain-weather-center-live-port-freight-updates/",
+  "MSC customer advisories, read 21 Sep 2026, 22:14 UTC via Chrome — newest entries dated 14 September 2026 are the Golden Week sailing programme for the Emerald service and the resumption of the Indusa service in the Red Sea. No port-closure or weather advisory for any tracked port. https://www.msc.com/en/newsroom/customer-advisories",
+  "Kuehne+Nagel weekly port operational update — no article published for the weeks ending 15, 17, 18, 19, 21 or 22 September 2026; the newest available remains the 2-8 September edition, so no fresher berth-waiting figures were available from this source at read time."
+ ],
+ "systems": [
+  {
+   "name": "Dujuan",
+   "cat": "TY",
+   "pos": [
+    37.2,
+    145.9
+   ],
+   "threats": []
+  }
+ ],
+ "ports": {},
+ "remarks": [
+  "No tracked port carries a weather or closure entry this run, and none carried one last run either. Nothing in the set is suspended or recovering from a storm.",
+  "Dujuan is the only active system in the basin and it is no longer a container-port story at all. It has moved from 32.3N 138.3E to 37.2N 145.9E since the 21 September read, running northeast at 45 km/h into open water east of Japan, and its closest approach to any tracked port has widened from 911 km to 1,530 km at Busan. The forecast track out to +24h only widens it further. No threat rows are written.",
+  "The queues at Shanghai, Ningbo and Yantian are still large but they are not a weather event. Saudel and Krovanh dissipated in early September; what is left is backlog plus the cargo rush ahead of Golden Week on 1 October. Those ports are deliberately kept out of the port list so the site's own idle-berth flag is not suppressed — the congestion data speaks for itself here.",
+  "One scheduled stoppage worth knowing about but deliberately not recorded as a port entry: Busan terminals halt for 24 hours from 25 to 26 September for Chuseok. That is a public holiday, not an extraordinary disruption, and writing it as suspended would both mislead and block the site's automatic removal rules."
+ ]
 }
