@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-22T01:28:05.287Z",
+  "updated": "2026-09-22T22:28:32.939Z",
   "window": {
     "wmin": 39,
     "wmax": 46,
@@ -8,29 +8,25 @@
   },
   "coverage": {
     "carriersScanned": [
-      "Evergreen / ShipmentLink (TVS2 InteractiveSchedule, 8 point-to-point lanes, plus TVS2 VesselSchedule drill-down on EVER LASTING and EVER LUCKY). Depth 28 days only - durationWeek maxes at 28, so Evergreen covers departures 22 Sep - 20 Oct 2026 (ISO weeks 39-43). The second pass at departureDay +28 was attempted and refused: ERR_CONNECTION_CLOSED after roughly ten requests. ISO weeks 44-46 are NOT covered by Evergreen this run.",
-      "Hapag-Lloyd (schedule.api.hlag.cloud public routes API, 18 lane queries, full 8-week depth, no gating)",
-      "Wan Hai (SkdBySvcCsv single-shot pull of AA7, AA9, AA10, AA11, AA12 - AA10/AA11/AA12 returned empty, so no new AAn service exists)"
+      "Evergreen / ShipmentLink (TVS2 InteractiveSchedule, 18 point-to-point lanes: Yantian, Shanghai, Ningbo, Pusan, Cai Mep to New York, Savannah and Houston, plus Xiamen to New York and Savannah and Kaohsiung to New York; TVS2 VesselSchedule drill-down on EVER LASTING). Depth 28 days only because durationWeek maxes at 28, so Evergreen covers departures 21 Sep to 19 Oct 2026 (ISO weeks 39-42/43). No second +28 pass this run, so ISO weeks 44-46 are NOT covered by Evergreen.",
+      "Hapag-Lloyd (schedule.api.hlag.cloud public routes API, 20 lane queries, full 8-week depth, no gating. Cai Mep must be queried as VNVUT - VNCMT and VNTOT both return 0 routes.)",
+      "Maersk (routing-unified routings-queries replay after one real UI search, 15 lanes, full window 21 Sep - 15 Nov, DRY forced. New York must be queried via the Newark NJ GEO_ID 02R2IYUF20M7Z - the New York NY city GEO_ID returns 422 No Product Found.)",
+      "Wan Hai (SkdBySvcCsv single-shot pull of AA9 and AA7, generation date 2026-09-23)"
     ],
     "carriersBlocked": [
       {
-        "carrier": "Maersk",
-        "reason": "Scanned successfully last run, blocked this run. The scheduled-run Chrome window is not visible (document.hidden true, document.hasFocus false). Real CDP clicks on the point-to-point origin field no longer focus it: the input lives in the shadow root of MC-C-LOCATION-SERVICEMODE inside MC-C-ORIGIN-DESTINATION, and after the click document.activeElement stays BODY and the typed text goes nowhere. Without one completed UI search there are no request headers to capture, so the routing-unified routings-queries replay cannot be built. Evergreen and Hapag accepted the same synthetic clicks, so this is specific to the Maersk web components, not to the browser.",
-        "since": "2026-09-22"
-      },
-      {
         "carrier": "CMA CGM",
-        "reason": "Not attempted this run by deliberate choice. The routing-finder DataDome quota is roughly 20 POSTs and is shared on this IP with the liner-tracker-market-refresh task. Evergreen already covered the same Ocean Alliance codes (SAX, CBX, AUE, NUE, NUE2, PEX3, GME, AUG) for weeks 39-43, so the marginal XL value did not justify spending the sibling task quota. Not a block - a skipped source.",
+        "reason": "Not scanned this run, on purpose: the DataDome quota (403 after about 20 POSTs, sticky per lane) is shared with the liner-tracker-market-refresh task on the same IP. Carried forward, not re-tested.",
         "since": "2026-09-22"
       },
       {
         "carrier": "MSC / ZIM",
-        "reason": "Scanned last run, not this run. www.msc.com/en/search-a-schedule loaded but rendered only a 760-character shell; none of the 22 served scripts contained an /api/feature/tools/ path, so the SearchSailingRoutes endpoint could not be resolved without a UI interaction, which the hidden window blocks in the same way as Maersk. Zero MSC or ZIM lanes queried.",
+        "reason": "Not scanned this run - time budget spent on Evergreen, Hapag and Maersk. zim.com still treated as optional after the 27 Aug site-wide error page.",
         "since": "2026-09-22"
       },
       {
         "carrier": "ONE",
-        "reason": "Scanned last run, not this run. The Route Finder page loaded and was NOT gated (no Thanks for Your Patience banner). The v1/schedule/point-to-point/search endpoint was located in the bundle, but its host could not be resolved: ecomm.one-line.com redirects to www.one-line.com and /api/v1/schedule/point-to-point/pols-pods there returns the Next.js 404 shell, while calling ecomm directly from www is blocked by CORS. Zero ONE lanes queried, so MS2 filtering was not exercised this run.",
+        "reason": "Not scanned this run - time budget. ONE serves about 3 lanes per session before the Thanks for Your Patience wall, so it is always last and was dropped first.",
         "since": "2026-09-22"
       },
       {
@@ -54,7 +50,7 @@
         "since": "2026-08-27"
       }
     ],
-    "lanesQueried": 29,
+    "lanesQueried": 53,
     "independentsScanned": false,
     "blindSpotNote": "Independents not scanned (out of scope): SeaLead, TS Lines, Emirates, CU Lines, Transfar, Matson and similar. Ad-hoc capacity from these carriers is not reflected here."
   },
@@ -164,10 +160,11 @@
       "svc": "OGEC",
       "serviceLabel": "Ocean-Going Ad Hoc call America East Coast(OGEC)",
       "detectedBy": [
-        "Evergreen ShipmentLink point-to-point CNNGB-USNYC, departures from 22 Sep 2026, 28-day window: NUE2 4, NUE 4, OGEC 1 - OGEC is the only code absent from the alliance registry",
-        "Evergreen ShipmentLink point-to-point KRPUS-USNYC same window: NUE2 5, NUE 4, CBX 3, OGEC 1, plus NSB 5 and KTH 4 which are southbound transhipment first legs and were dropped",
-        "Evergreen TVS2 VesselSchedule drill-down on vessel code LSTN returned the rotation verbatim with LINE: Ocean-Going Ad Hoc call America East Coast(OGEC), and a matching 0021-097W westbound leg confirming a full round trip",
-        "Not present on CNSHA-USNYC or CNSHA-USSAV this run because the Shanghai departure (16 Sep) has fallen out of the ISO week 39-46 window; the Ningbo and Pusan departures are still in window"
+        "Evergreen ShipmentLink point-to-point CNNGB-USNYC, departures from 21 Sep 2026, 28-day window: NUE2 4, NUE 4, OGEC 1 - OGEC 1 ETD 22 Sep, ETA NY 24 Oct, 32 days",
+        "Evergreen ShipmentLink KRPUS-USNYC same window: NUE2 5, NUE 4, CBX 4, OGEC 1 (ETD 27 Sep, ETA 24 Oct, 27 days), plus NSB 5 and KTH 4 which are on the deny-list",
+        "Evergreen ShipmentLink CNNGB-USSAV and KRPUS-USSAV: OGEC 1 each, ETA Savannah 29 Oct",
+        "Evergreen TVS2 VesselSchedule drill-down on vessel code LSTN (23 Sep 2026) returned the rotation verbatim with LINE: Ocean-Going Ad Hoc call America East Coast(OGEC), and the 0021-097W westbound leg (New York 24 Oct ... Ningbo 09 Dec) confirming a round trip",
+        "Not present on CNSHA, CNYTN, CNXMN or VNTOT lanes this run because those calls departed before 21 Sep (Xiamen 31 Aug, Qingdao 05 Sep, Shanghai 16 Sep)"
       ],
       "carriers": [
         "Evergreen"
@@ -231,60 +228,60 @@
         },
         {
           "port": "NEW YORK",
-          "eta": "2026-10-21",
-          "etd": "2026-10-22"
+          "eta": "2026-10-24",
+          "etd": "2026-10-25"
         },
         {
           "port": "SAVANNAH",
-          "eta": "2026-10-26",
-          "etd": "2026-10-27"
+          "eta": "2026-10-29",
+          "etd": "2026-10-30"
         },
         {
           "port": "BOSTON",
-          "eta": "2026-10-30",
-          "etd": "2026-10-31"
+          "eta": "2026-11-02",
+          "etd": "2026-11-03"
         },
         {
           "port": "BALTIMORE",
-          "eta": "2026-11-02",
-          "etd": "2026-11-03"
+          "eta": "2026-11-05",
+          "etd": "2026-11-06"
         }
       ],
       "transit": {
         "CNXMN": {
-          "USNYC": 51,
-          "USSAV": 56
+          "USNYC": 54,
+          "USSAV": 59
         },
         "CNTAO": {
-          "USNYC": 46,
-          "USSAV": 51
+          "USNYC": 49,
+          "USSAV": 54
         },
         "CNSHA": {
-          "USNYC": 35,
-          "USSAV": 40
+          "USNYC": 38,
+          "USSAV": 43
         },
         "CNNGB": {
-          "USNYC": 29,
-          "USSAV": 34
+          "USNYC": 32,
+          "USSAV": 37
         },
         "KRPUS": {
-          "USNYC": 24,
-          "USSAV": 29
+          "USNYC": 27,
+          "USSAV": 32
         }
       },
       "vsProforma": {
         "svc": "NUE2",
         "pair": "CNNGB-USNYC",
         "proformaDays": 27,
-        "xlDays": 29,
-        "deltaDays": 2
+        "xlDays": 32,
+        "deltaDays": 5
       },
       "firstSeen": "2026-08-27",
-      "lastSeen": "2026-09-22",
+      "lastSeen": "2026-09-23",
       "missedRuns": 0,
       "verified": true,
-      "src": "Evergreen ShipmentLink TVS2 InteractiveSchedule (CNNGB-USNYC and KRPUS-USNYC) plus TVS2 VesselSchedule vslCode LSTN, read 22 Sep 2026",
-      "note": "SCHEDULE SLIPPED SINCE THE 21 SEP RUN. Ningbo ETD 21 Sep to 22 Sep, Pusan ETD 23 Sep to 27 Sep, Panama Canal 12 Oct to 17 Oct, Colon 13 Oct to 19 Oct, New York arrival 18 Oct to 21 Oct, Savannah 23 Oct to 26 Oct, Boston 27 Oct to 30 Oct, Baltimore 29 Oct to 2 Nov. Ningbo-New York transit moved from 27 to 29 days and Pusan-New York from 25 to 24 days. In-window departures are Ningbo 22 Sep (week 39) and Pusan 27 Sep (week 40); the Xiamen, Qingdao and Shanghai departures have fallen out of the window but stay in the rotation because they belong to the same voyage. TEU 9,466 and IMO 9595450 carried forward unchanged - vessel capacity is static and was not re-queried."
+      "src": "ss.shipmentlink.com TVS2_InteractiveSchedule + TVS2_VesselSchedule (vslCode LSTN), scraped 2026-09-23",
+      "note": "Rotation re-scraped 23 Sep 2026. The US end has slipped 2 days vs the 22 Sep run: New York 2026-10-22 -> 2026-10-24, Savannah 2026-10-27 -> 2026-10-29, Boston 2026-10-31 -> 2026-11-02, Baltimore 2026-11-03 -> 2026-11-05. Asia calls unchanged. Only the Ningbo (22 Sep, wk 39) and Pusan (27 Sep, wk 39) departures are inside this run window; Xiamen, Qingdao and Shanghai sailed before it. OGEC voyage 0022 not seen on any Evergreen lane this run (4-week depth)."
     },
     {
       "id": "AA9-WAN-HAI-903-E002",
@@ -401,19 +398,19 @@
         "deltaDays": -10
       },
       "firstSeen": "2026-08-20",
-      "lastSeen": "2026-09-22",
+      "lastSeen": "2026-09-23",
       "missedRuns": 0,
       "verified": true,
       "src": "Wan Hai SkdBySvcCsv srv_code AA9 bound E, generation date 2026/09/22, seeded from SkdBySvcDetail.xhtml",
-      "note": "Rotation and every ETA/ETD are byte-identical to the 21 Sep run - no slip. The vsProforma figure is new this run: Hapag-Lloyd CNNGB-USNYC returned three AA7 sailings at 48, 49 and 50 days (WAN HAI A15 30 Sep to 18 Nov, WAN HAI A08 22 Oct to 9 Dec, CAUTIN 27 Oct to 16 Dec), so AA9 at 39 days is about ten days FASTER than the Wan Hai proforma on the same pair - it runs Balboa rather than the AA7 routing. Caveat kept from earlier runs: AA9 is a numbered service name, not a verbatim ad-hoc label, so the classification rests on the two-sailing pattern and the absence of AA9 from every alliance registry, not on carrier wording."
+      "note": "Re-verified 23 Sep 2026 via Wan Hai SkdBySvcCsv AA9 bound E (generation date 2026/09/23): WAN HAI 903 E002 rotation and dates unchanged vs 22 Sep. Rotation and every ETA/ETD are byte-identical to the 21 Sep run - no slip. The vsProforma figure is new this run: Hapag-Lloyd CNNGB-USNYC returned three AA7 sailings at 48, 49 and 50 days (WAN HAI A15 30 Sep to 18 Nov, WAN HAI A08 22 Oct to 9 Dec, CAUTIN 27 Oct to 16 Dec), so AA9 at 39 days is about ten days FASTER than the Wan Hai proforma on the same pair - it runs Balboa rather than the AA7 routing. Caveat kept from earlier runs: AA9 is a numbered service name, not a verbatim ad-hoc label, so the classification rests on the two-sailing pattern and the absence of AA9 from every alliance regi"
     },
     {
       "id": "XL-MAERSK-MONTANA-639E",
       "svc": "XL",
       "serviceLabel": "XL (serviceName XL, serviceCode 770, returned verbatim by the Maersk routing API)",
       "detectedBy": [
-        "maersk routing-unified routings-queries CNYTN-USHOU 2026-09-21 to 2026-11-15 (XL 1 vs TP15 8)",
-        "maersk routing-unified routings-queries KRPUS-USHOU same window (XL 1 vs TP15 8)",
+        "maersk routing-unified routings-queries CNYTN-USHOU 2026-09-21 to 2026-11-15, re-queried 23 Sep 2026: XL 1 vs TP15 9 (TP15 median 34 days)",
+        "maersk routing-unified routings-queries KRPUS-USHOU same window: XL 1 vs TP15 8",
         "maersk CNSHA-USHOU and CNNGB-USHOU same window returned TP15 only, so the XL does not call Shanghai or Ningbo"
       ],
       "carriers": [
@@ -443,13 +440,13 @@
         },
         {
           "port": "YANTIAN",
-          "eta": "2026-09-22",
-          "etd": "2026-09-23"
+          "eta": null,
+          "etd": "2026-09-24"
         },
         {
           "port": "BUSAN",
-          "eta": "2026-09-27",
-          "etd": "2026-09-28"
+          "eta": null,
+          "etd": "2026-09-29"
         },
         {
           "port": "PANAMA CANAL",
@@ -464,25 +461,25 @@
       ],
       "transit": {
         "CNYTN": {
-          "USHOU": 38
+          "USHOU": 37
         },
         "KRPUS": {
-          "USHOU": 33
+          "USHOU": 32
         }
       },
       "vsProforma": {
         "svc": "TP15",
         "pair": "CNYTN-USHOU",
         "proformaDays": 34,
-        "xlDays": 38,
-        "deltaDays": 4
+        "xlDays": 37,
+        "deltaDays": 3
       },
       "firstSeen": "2026-09-09",
-      "lastSeen": "2026-09-21",
+      "lastSeen": "2026-09-23",
       "missedRuns": 0,
       "verified": true,
-      "src": "Maersk routing-unified routings-queries replay on 2026-09-21 (second run of the day; fresh header capture from a UI search on maersk.com/schedules/pointToPoint, GEO_ID pairs Yantian 0L3DBFFJ3KZ9A and Busan 2XOHKM8FX8VI7 to Houston 183AKT65YAHRZ, cargo forced to DRY and isTemperatureControlRequired false). Yantian ETD 2026-09-23 and Busan ETD 2026-09-28 into Houston ETA 2026-10-31 / ETD 2026-11-01, unchanged. Gwangyang and the Panama Canal call are carried forward from the 16 Sep vessel-schedule pull and were NOT re-pulled this run - the Maersk vessel-schedule API returns HTTP 401 for the public web key. vsProforma recomputed this run from the eight TP15 CNYTN-USHOU sailings in window (transits 39, 32, 33, 34, 31, 34, 34, 34 days; modal 34), which moves the delta from +5 to +4.",
-      "note": "NOT RE-QUERIED ON 22 SEP 2026 - MAERSK WAS BLOCKED THIS RUN (see coverage.carriersBlocked). Everything below, including the rotation, the TEU and the vsProforma figures, is the 21 Sep 2026 scrape carried forward verbatim; lastSeen is deliberately left at 2026-09-21 so the staleness is visible. missedRuns was NOT incremented because Maersk was never queried - absence of a sighting here is absence of evidence, not evidence of absence. The Yantian departure of 23 Sep 2026 falls in ISO week 39 and so is still inside this run window. --- CARRIED-FORWARD DETECTOR CAUTION: DETECTOR CAUTION on this source. The Maersk routing API exposes a boolean isRoutingAdhoc. On CNYTN-USHOU it is true only for this XL row and false for all eight TP15 rows, which looks like a clean ad-hoc label. On KRPUS-USHOU it is true for EVERY row including all eight TP15 proforma sailings. It therefore behaves like a per-pair routing attribute, not an ad-hoc marker, and must be treated as context only - the same way isGemini is - never as a trigger. This voyage stays classified as an extra loader on the strength of the serviceName XL / serviceCode 770 being absent from every alliance registry, not on that flag. vsProforma uses the modal TP15 transit observed this run (33 days across 4 of 8 sailings); the 17 Sep record used 34, so the 1-day move in deltaDays is a proforma-side change, not a slip."
+      "src": "api.maersk.com routing-unified routings-queries (replayed after one real UI search), 2026-09-23",
+      "note": "Re-queried 23 Sep 2026 after being blocked on 22 Sep. Asia ETDs slipped one day: Yantian 2026-09-23 -> 2026-09-24, Busan 2026-09-28 -> 2026-09-29. Houston ETA 31 Oct (ETD 01 Nov) confirmed unchanged. The routing API only returns POL and POD per leg, so Gwangyang 19 Sep and the Panama Canal 21 Oct transit are carried forward from the 21 Sep scrape and were not re-verified; Yantian and Busan ETAs are left null rather than guessed. DETECTOR CAUTION: Maersk isRoutingAdhoc is true on every TP15 and TP12 row from Busan too, so it is context only, never a trigger - this item is flagged because serviceName XL (code 770) is not in the registry and n 1."
     }
   ],
   "history": [
@@ -518,48 +515,48 @@
     {
       "type": "EXTRA LOADER UPDATED",
       "id": "OGEC-EVER-LASTING-0021-097E",
-      "date": "2026-09-22",
-      "detail": "Evergreen OGEC / EVER LASTING 0021-097E has slipped across the whole back half of the rotation. BEFORE (21 Sep run): Ningbo ETD 21 Sep, Pusan ETD 23 Sep, Panama Canal 12 Oct, Colon 13 Oct, New York 18 Oct, Savannah 23 Oct, Boston 27 Oct, Baltimore 29 Oct. AFTER (22 Sep run, read from TVS2 VesselSchedule vslCode LSTN): Ningbo ETD 22 Sep, Pusan ETD 27 Sep, Panama Canal 17 Oct, Colon 19 Oct, New York arrival 21 Oct, Savannah 26 Oct, Boston 30 Oct, Baltimore 2 Nov. Net effect for a shipper: Ningbo-New York goes 27 to 29 days, Pusan-New York goes 25 to 24 days because the vessel now spends four extra days in Pusan."
+      "date": "2026-09-23",
+      "detail": "US arrivals slipped 2 days. Before: New York 2026-10-22, Savannah 2026-10-27, Boston 2026-10-31, Baltimore 2026-11-03. After: New York 2026-10-24, Savannah 2026-10-29, Boston 2026-11-02, Baltimore 2026-11-05. Ningbo-NY transit 29 -> 32 days, delta vs NUE2 now +5 days."
+    },
+    {
+      "type": "EXTRA LOADER UPDATED",
+      "id": "XL-MAERSK-MONTANA-639E",
+      "date": "2026-09-23",
+      "detail": "Asia ETDs slipped 1 day. Before: Yantian 2026-09-23, Busan 2026-09-28. After: Yantian 2026-09-24, Busan 2026-09-29. Houston ETA 2026-10-31 unchanged. Yantian-Houston 37 days, +3 vs TP15."
     },
     {
       "type": "SOURCE BLOCKED",
-      "carrier": "Maersk",
-      "date": "2026-09-22",
-      "detail": "Scanned last run, not this run. In a scheduled run the Chrome window is hidden (document.hidden true, hasFocus false) and real CDP clicks no longer focus the point-to-point origin input, which sits in the shadow root of MC-C-LOCATION-SERVICEMODE - activeElement stays BODY and typed text is discarded. No completed UI search means no captured headers, so the routings-queries replay cannot be built. XL-MAERSK-MONTANA-639E is carried forward unverified-this-run rather than dropped."
+      "carrier": "CMA CGM",
+      "date": "2026-09-23",
+      "detail": "Not scanned - skipped on purpose to protect the DataDome quota shared with the market-refresh task."
     },
     {
       "type": "SOURCE BLOCKED",
       "carrier": "MSC / ZIM",
-      "date": "2026-09-22",
-      "detail": "Scanned last run, not this run. search-a-schedule rendered a 760-character shell and none of the 22 served scripts exposed an /api/feature/tools/ path, so SearchSailingRoutes could not be reached without a UI interaction that the hidden window blocks. Zero MSC and zero ZIM lanes queried."
+      "date": "2026-09-23",
+      "detail": "Not scanned this run (time budget)."
     },
     {
       "type": "SOURCE BLOCKED",
       "carrier": "ONE",
-      "date": "2026-09-22",
-      "detail": "Scanned last run, not this run, and NOT rate-limited - the Thanks for Your Patience banner was absent. The v1/schedule/point-to-point/search path exists in the bundle but its host is unresolvable from here: ecomm.one-line.com redirects to www.one-line.com, /api/v1/... on www returns the Next.js 404 shell, and calling ecomm from www is CORS-blocked. Consequence beyond ONE itself: Yang Ming and HMM tonnage normally reaches this tracker only through ONE under EC1-EC4, so both carriers have zero coverage this run."
+      "date": "2026-09-23",
+      "detail": "Not scanned this run (time budget; ONE always runs last)."
     },
     {
       "type": "PARTIAL",
-      "date": "2026-09-22",
-      "detail": "Lanes NOT covered this run. (1) ISO weeks 44-46 have no Evergreen coverage at all: durationWeek caps at 28 days, so the first pass reached only 20 Oct 2026, and the second pass at departureDay 20 Oct was refused with ERR_CONNECTION_CLOSED after roughly ten requests. Hapag-Lloyd did cover the full window. (2) CMA CGM: zero lanes, skipped on purpose to protect the shared DataDome quota. (3) MSC, ZIM, ONE, Maersk: zero lanes, see the SOURCE BLOCKED entries. (4) Evergreen Ningbo-Houston and Ningbo-Savannah were lost to the throttle mid-sweep. (5) Budget origins Xiamen, Qingdao, Singapore, Port Klang and Kaohsiung were queried on Hapag only (Xiamen and Qingdao returned no direct single-leg service) and not on Evergreen."
-    },
-    {
-      "type": "REGISTRY UPDATED",
-      "code": "AUG",
-      "date": "2026-09-22",
-      "detail": "AUG surfaced on Evergreen CNYTN-USHOU with n 2 in a 28-day window, which by the n<=2 rule is an XL candidate. The TVS2 VesselSchedule drill-down on EVER LUCKY (vslCode LUKY) settled it: LINE: Asia-U.S. GULF Service(AUG), rotation Kaohsiung - Cai Mep - Yantian - Ningbo - Pusan - Panama Canal - Houston - Mobile, with a matching 085W westbound leg. A fixed round-trip rotation with a named trade lane is a proforma Gulf service, not an ad-hoc voyage; two sailings in four weeks is simply a fortnightly cadence. AUG added to serviceRegistry under Ocean Alliance so it stops triggering."
-    },
-    {
-      "type": "NO NEW SERVICE",
-      "date": "2026-09-22",
-      "detail": "NSB (n 5) and KTH (n 4) appeared on Evergreen KRPUS-USNYC and would otherwise trip the unknown-code-with-n>=3 rule. Every one of their voyage numbers ends in S, not E, and their transits run 43-53 days against 22-32 days for the direct NUE/NUE2 sailings on the same pair: these are southbound feeder first legs of transhipment routings, not direct services. Both codes were already on ignoredCodes from an earlier run and stay there. No promotion."
+      "date": "2026-09-23",
+      "detail": "Lanes NOT covered: (1) Evergreen ISO weeks 44-46 (28-day depth, no second pass). (2) CMA CGM, MSC/ZIM, ONE: zero lanes. (3) Evergreen budget origins Qingdao, Singapore, Port Klang not queried; Kaohsiung only to New York; Xiamen only to New York and Savannah. (4) Hapag budget origins queried to New York only (plus Singapore and Kaohsiung none to Savannah/Houston). (5) Maersk New York was queried via Newark NJ."
     },
     {
       "type": "WATCH",
-      "code": "OGEC",
-      "date": "2026-09-22",
-      "detail": "No OGEC voyage 0022 anywhere this run. Voyages 0020 (TRITON, sailed 2 Sep, now in history) and 0021 (EVER LASTING) were consecutive and roughly a week apart, which is why OGEC was called a rolling programme. Evergreen only reached 20 Oct this run, so a late-October or November 0022 would sit in the blind spot rather than being genuinely absent. Do not conclude the programme has stopped on this run alone."
+      "code": "OGWC",
+      "date": "2026-09-23",
+      "detail": "Evergreen code OGWC (by analogy with OGEC, likely an ad-hoc West Coast call - label not drilled) appears on CNSHA-USHOU and CNNGB-USHOU with POD Los Angeles and rail to Houston. Not direct Gulf coverage, same rule as MS2, so not published. Not added to the deny-list until the LINE: label is confirmed."
+    },
+    {
+      "type": "NO NEW SERVICE",
+      "date": "2026-09-23",
+      "detail": "No unknown code with n>=3 on any in-scope direct lane. No OGEC voyage 0022 seen in the 4-week Evergreen window. Hapag Yantian-NY fixture: AA7 5 (isGemini false), US4 7 (isGemini true) - nothing flagged, as expected."
     }
   ]
 }
