@@ -1,29 +1,33 @@
 {
- "updated": "22 Sep 2026, 22:13 UTC — JMA active-cyclone feed + port/terminal advisories",
- "asOf": "2026-09-22",
+ "updated": "23 Sep 2026, 22:36 UTC — JMA active-cyclone feed + port/terminal advisories",
+ "asOf": "2026-09-23",
  "sources": [
-  "JMA bosai typhoon feed (targetTc.json + specifications.json), read 22 Sep 2026, 22:13 UTC. Two entries: TC2632 (provisional id 'b'), a tropical depression analysed at 14.8N 140.1E, 1006 hPa, 30 kt, advisory 22 Sep 19:25 UTC; and TC2630 Dujuan, now reclassified LOW (extratropical) at 40.0N 154.0E. TC2632 is forecast to become TS at +24h, STS at +72h and TY at +120h near 21.8N 125.0E, heading west-northwest toward the sea east of Taiwan. Closest approach of any analysis or forecast point to a tracked port: Xiamen 766 km at +120h, Shanghai/Ningbo 1,011 km, Shenzhen (Yantian) 1,139 km. Nothing inside 600 km, so no threat rows. https://www.jma.go.jp/bosai/typhoon/data/targetTc.json",
-  "Kuehne+Nagel port operational updates, 16-22 Sep 2026: 7-day average vessel waiting times Shanghai 4.72 days, Ningbo 2.51, Yantian 1.56, Busan 1.75, Qingdao 1.21. Congestion and yard density, no weather closures reported. Busan has a Chuseok holiday closure on 25 Sep. https://mykn.kuehne-nagel.com/news/article/port-operational-updates-from-22-09-2026",
-  "SEKO Asia-Pacific Logistics Monitoring Center, last updated 11 Sep 2026 (stale): Saudel and Krovanh dissipated, all offices operational. https://www.sekologistics.com/hk-en/resources/asia-supply-chain-weather-center-live-port-freight-updates/",
-  "Web search for port suspensions/typhoon closures at Shanghai, Ningbo, Yantian, Xiamen, Qingdao and Busan, 23 Sep 2026: nothing newer than the late-August Saudel closures."
+  "JMA bosai typhoon feed (targetTc.json + specifications.json), read 23 Sep 2026, 22:36 UTC. One active system: TC2632 Surigae (typhoon no. 2626), tropical storm at 17.9N 134.8E, 1002 hPa, 40 kt (JMA issue 24 Sep 06:45 JST). Forecast to reach STS in ~69h near 22.3N 126.8E and TY in ~93h near 24.0N 127.4E, then 25.0N 127.8E at 117h (965 hPa), heading for the Okinawa area.",
+  "Great-circle scoring against the 9 Asian tracked ports: closest approach is Shanghai/Ningbo at 846 km (117h), Xiamen 921 km (69h), Busan 1,129 km (117h), Shenzhen (Yantian) 1,320 km (69h). Nothing inside the 600 km threat radius, so no threats recorded.",
+  "MSC customer advisories (msc.com, read via Chrome): no port-closure or weather notices for tracked ports; latest items dated 14 Sep 2026 (Golden Week sailing programme, Indusa Red Sea resumption).",
+  "SEKO Asia-Pacific Logistics Monitoring Center: page still last updated 11 Sep 2026 (stale). Says weather calm; lists a planned 24-hour Busan terminal halt 25-26 Sep for Chuseok (a holiday, not weather).",
+  "Seoul Economic Daily, 22 Sep 2026: all nine Busan container terminals operate normally through Chuseok except on Chuseok day, 25 Sep.",
+  "Stars and Stripes storm tracker, 23 Sep 2026: Surigae formed west of the Marianas; JTWC track points toward Okinawa by mid next week, with some model runs pointing at Taiwan or the Batanes.",
+  "Kuehne+Nagel weekly port operational update for 23 Sep 2026 not published yet ('article not found'). No new K+N waiting-time figures used this run."
  ],
  "systems": [
   {
-   "name": "TD 2632",
-   "cat": "TD",
+   "name": "Surigae",
+   "cat": "TS",
    "pos": [
-    14.8,
-    140.1
+    17.9,
+    134.8
    ],
    "threats": []
   }
  ],
  "ports": {},
  "remarks": [
-  "No tracked port is suspended, recovering or under weather watch. None carried an entry last run either.",
-  "Dujuan has gone extratropical (LOW) far out in the Pacific at 40N 154E and is dropped from the systems list.",
-  "A new tropical depression, TC2632, formed near 14.8N 140.1E. JMA forecasts it to reach typhoon strength in about five days near 21.8N 125.0E, east of Taiwan. The closest forecast point is still 766 km from Xiamen, outside the 600 km threat radius, so no threat is recorded yet. Watch it on the next runs: if the track bends toward the Taiwan Strait or East China Sea, Xiamen, Shenzhen and Shanghai/Ningbo come into range right around Golden Week.",
-  "The big queues at Shanghai (K+N 4.72 days average wait) and Ningbo (2.51 days) are congestion and pre-Golden Week volume, not weather. They are kept out of the port list so the site's idle-berth flag stays live.",
-  "Busan closes for Chuseok on 25 Sep. That is a scheduled holiday, not a weather event, so no entry is written."
+  "No tracked port is suspended, recovering or under weather watch. None carried an entry last run either, so nothing expired.",
+  "TD 2632 from last run is now Tropical Storm Surigae (TS, 40 kt). JMA has it reaching typhoon strength near Okinawa in about 4 days. The closest forecast point to any tracked port is 846 km from Shanghai/Ningbo at +117h, outside the 600 km radius.",
+  "Watch Surigae on the next runs. Some model runs point toward Taiwan. A westward shift would bring Xiamen, Shenzhen (Yantian) and Shanghai/Ningbo into range right before Golden Week (1-7 Oct).",
+  "Busan terminals stop for Chuseok on 25 Sep. That is a holiday, not weather, so Busan is not listed as a port entry.",
+  "Search results about Super Typhoon Ragasa shutting Hong Kong and Shenzhen ports are from September 2025, not this year. They were ignored.",
+  "Linerlytica has not published congestion data after 20 Sep, so the queue figures on the site still end at 20 Sep."
  ]
 }
