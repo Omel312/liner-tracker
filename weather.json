@@ -1,36 +1,19 @@
 {
-  "updated": "6 Oct 2026, 23:17 UTC — JMA active-cyclone feed + port/terminal advisories",
-  "asOf": "2026-10-06",
+  "updated": "12 Oct 2026, 13:05 UTC — JMA active-cyclone feed + port/terminal advisories",
+  "asOf": "2026-10-12",
   "sources": [
-    "JMA bosai typhoon feed (targetTc.json + specifications.json), read 6 Oct 2026 (issues dated 7 Oct JST). Three active systems: TC2634 Koguma (STS) at 14.9N 163.9E, TC2635 Nolo (TY) at 25.5N 165.2E, TC2633 Choi-wan (TY) at 37.9N 151.4E. All are in the open Pacific, far east of Asia.",
+    "JMA bosai typhoon feed (targetTc.json + specifications.json), read 12 Oct 2026 (issue 21:45 JST). One active system: TC2634 Koguma (TY) at 31.4N 148.5E, in the open Pacific east of Japan.",
     "Great-circle scoring of every analysis/forecast point against the 9 Asian tracked ports: nothing comes within the 600 km threat radius, so no threats recorded.",
-    "WebSearch for China/Korea port suspensions and terminal reopenings (Oct 2026): no current-dated closure or suspension notice found. Hits were older events (Dolphin, Saudel, Chanthu, Ragasa). SEKO, MSC advisories and K+N weekly update were not checked this run."
+    "WebSearch for China/Korea port suspensions and reopenings (Oct 2026): no current-dated closure notice found; hits were older events.",
+    "SEKO Asia-Pacific Logistics Monitoring Center (page stamped 30 Sep 2026; stale): all six watched ports open, no weather closures. Waits: Shanghai 4-7 days, Ningbo ~4, Yantian 1.5-4, Qingdao 1.5-2, Busan 1.5-2 (expected 2-3). Xiamen no figure. MSC advisories and K+N weekly update not checked this run."
   ],
   "systems": [
     {
       "name": "Koguma",
-      "cat": "STS",
-      "pos": [
-        14.9,
-        163.9
-      ],
-      "threats": []
-    },
-    {
-      "name": "Nolo",
       "cat": "TY",
       "pos": [
-        25.5,
-        165.2
-      ],
-      "threats": []
-    },
-    {
-      "name": "Choi-wan",
-      "cat": "TY",
-      "pos": [
-        37.9,
-        151.4
+        31.4,
+        148.5
       ],
       "threats": []
     }
@@ -38,7 +21,7 @@
   "ports": {},
   "remarks": [
     "No tracked port is suspended, recovering or under weather watch. None carried an entry last run, so nothing expired.",
-    "Three cyclones active (Koguma, Nolo, Choi-wan), all in the open Pacific and none within 600 km of a tracked port.",
-    "Linerlytica congestion data now runs through 4 Oct 2026 (7 new days added)."
+    "One cyclone active (Koguma, typhoon) in the open Pacific, none within 600 km of a tracked port. Nolo and Choi-wan from last run have left the JMA feed.",
+    "Linerlytica congestion data now runs through 9 Oct 2026 (5 new days added, 76 stored)."
   ]
 }
