@@ -1,27 +1,25 @@
 {
-  "updated": "12 Oct 2026, 13:05 UTC — JMA active-cyclone feed + port/terminal advisories",
-  "asOf": "2026-10-12",
+  "updated": "16 Oct 2026, 22:09 UTC — JMA active-cyclone feed + port/terminal advisories",
+  "asOf": "2026-10-16",
   "sources": [
-    "JMA bosai typhoon feed (targetTc.json + specifications.json), read 12 Oct 2026 (issue 21:45 JST). One active system: TC2634 Koguma (TY) at 31.4N 148.5E, in the open Pacific east of Japan.",
-    "Great-circle scoring of every analysis/forecast point against the 9 Asian tracked ports: nothing comes within the 600 km threat radius, so no threats recorded.",
-    "WebSearch for China/Korea port suspensions and reopenings (Oct 2026): no current-dated closure notice found; hits were older events.",
-    "SEKO Asia-Pacific Logistics Monitoring Center (page stamped 30 Sep 2026; stale): all six watched ports open, no weather closures. Waits: Shanghai 4-7 days, Ningbo ~4, Yantian 1.5-4, Qingdao 1.5-2, Busan 1.5-2 (expected 2-3). Xiamen no figure. MSC advisories and K+N weekly update not checked this run."
+    "JMA bosai typhoon feed (targetTc.json + specifications.json), read 16 Oct 2026. One active system: TC2636 Champi (TY) at 12.2N 149.6E, western Pacific near Guam; no analysis/forecast point within 600 km of any tracked Asian port.",
+    "WebSearch for China/Korea port suspensions and reopenings (Oct 2026): no current-dated closure notice found; hits were older events (Dolphin, Saudel, etc.).",
+    "SEKO Asia-Pacific Logistics Monitoring Center (page stamped 30 Sep 2026; stale): no weather closures at the six watched ports; waits Shanghai Yangshan ~7d, WGQ 4-4.5d, Ningbo MSICT ~4d, Yantian 3-4d mega / 1.5-2d small, Qingdao 1.5-2d, Busan 1.5-2d (expected 2-3d in wk 40). MSC advisories and K+N weekly update not checked this run."
   ],
   "systems": [
     {
-      "name": "Koguma",
+      "name": "Champi",
       "cat": "TY",
       "pos": [
-        31.4,
-        148.5
+        12.2,
+        149.6
       ],
       "threats": []
     }
   ],
   "ports": {},
   "remarks": [
-    "No tracked port is suspended, recovering or under weather watch. None carried an entry last run, so nothing expired.",
-    "One cyclone active (Koguma, typhoon) in the open Pacific, none within 600 km of a tracked port. Nolo and Choi-wan from last run have left the JMA feed.",
-    "Linerlytica congestion data now runs through 9 Oct 2026 (5 new days added, 76 stored)."
+    "Typhoon Champi is far east of Asia (near Guam); no tracked port inside the 600 km radius.",
+    "No active port closures or weather suspensions found at Shanghai, Ningbo, Yantian, Xiamen, Qingdao or Busan. Delays are congestion/dredging driven (per SEKO 30 Sep), not weather."
   ]
 }
