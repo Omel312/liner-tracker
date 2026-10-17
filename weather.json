@@ -1,25 +1,25 @@
 {
-  "updated": "16 Oct 2026, 22:09 UTC — JMA active-cyclone feed + port/terminal advisories",
-  "asOf": "2026-10-16",
+  "updated": "17 Oct 2026, 22:08 UTC — JMA active-cyclone feed + port/terminal advisories",
+  "asOf": "2026-10-17",
   "sources": [
-    "JMA bosai typhoon feed (targetTc.json + specifications.json), read 16 Oct 2026. One active system: TC2636 Champi (TY) at 12.2N 149.6E, western Pacific near Guam; no analysis/forecast point within 600 km of any tracked Asian port.",
+    "JMA bosai typhoon feed (targetTc.json + specifications.json), read 17 Oct 2026. One active system: TC2636 Champi (TY) at 13.0N 144.1E near Guam, tracking west-northwest; forecast to reach 20.3N 125.0E at +117h. Closest forecast point to any tracked port is Xiamen at roughly 850 km, outside the 600 km radius.",
     "WebSearch for China/Korea port suspensions and reopenings (Oct 2026): no current-dated closure notice found; hits were older events (Dolphin, Saudel, etc.).",
-    "SEKO Asia-Pacific Logistics Monitoring Center (page stamped 30 Sep 2026; stale): no weather closures at the six watched ports; waits Shanghai Yangshan ~7d, WGQ 4-4.5d, Ningbo MSICT ~4d, Yantian 3-4d mega / 1.5-2d small, Qingdao 1.5-2d, Busan 1.5-2d (expected 2-3d in wk 40). MSC advisories and K+N weekly update not checked this run."
+    "SEKO and K+N and MSC advisories not re-checked this run (SEKO page was stale on 30 Sep)."
   ],
   "systems": [
     {
       "name": "Champi",
       "cat": "TY",
       "pos": [
-        12.2,
-        149.6
+        13,
+        144.1
       ],
       "threats": []
     }
   ],
   "ports": {},
   "remarks": [
-    "Typhoon Champi is far east of Asia (near Guam); no tracked port inside the 600 km radius.",
-    "No active port closures or weather suspensions found at Shanghai, Ningbo, Yantian, Xiamen, Qingdao or Busan. Delays are congestion/dredging driven (per SEKO 30 Sep), not weather."
+    "Typhoon Champi is east of the Philippines and heading west-northwest; at the end of the JMA forecast (+117h) it is about 850 km from Xiamen, so no tracked port is inside the 600 km radius yet. Worth watching if the track bends north.",
+    "No active port closures or weather suspensions found at Shanghai, Ningbo, Yantian, Xiamen, Qingdao or Busan. Congestion data has no new snapshot since 11 Oct."
   ]
 }
