@@ -1,25 +1,42 @@
 {
-  "updated": "17 Oct 2026, 22:08 UTC — JMA active-cyclone feed + port/terminal advisories",
-  "asOf": "2026-10-17",
+  "updated": "18 Oct 2026, 22:09 UTC — JMA active-cyclone feed + port/terminal advisories",
+  "asOf": "2026-10-18",
   "sources": [
-    "JMA bosai typhoon feed (targetTc.json + specifications.json), read 17 Oct 2026. One active system: TC2636 Champi (TY) at 13.0N 144.1E near Guam, tracking west-northwest; forecast to reach 20.3N 125.0E at +117h. Closest forecast point to any tracked port is Xiamen at roughly 850 km, outside the 600 km radius.",
-    "WebSearch for China/Korea port suspensions and reopenings (Oct 2026): no current-dated closure notice found; hits were older events (Dolphin, Saudel, etc.).",
-    "SEKO and K+N and MSC advisories not re-checked this run (SEKO page was stale on 30 Sep)."
+    "JMA bosai typhoon feed (targetTc.json + specifications.json), read 2026-10-18. One active system: TC2636 Champi (TY) at 13.9N 140.0E, tracking west-northwest; forecast 23.1N 121.3E at +117h. Closest forecast point to a tracked port is Xiamen at about 360 km (+117h), inside the 600 km radius. Shenzhen (Yantian) ~755 km and Shanghai/Ningbo ~815 km are outside it.",
+    "WebSearch for China/Korea port suspensions and reopenings (Oct 2026): no current-dated closure notice found; hits were older events (Dolphin, Chanthu, Bavi, etc.).",
+    "SEKO, K+N and MSC advisories not re-checked this run."
   ],
   "systems": [
     {
       "name": "Champi",
       "cat": "TY",
       "pos": [
-        13,
-        144.1
+        13.9,
+        140
       ],
-      "threats": []
+      "threats": [
+        {
+          "port": "Xiamen",
+          "km": 360,
+          "inH": 117
+        }
+      ]
     }
   ],
-  "ports": {},
+  "ports": {
+    "Xiamen": {
+      "status": "watch",
+      "event": "Typhoon Champi",
+      "since": "18 Oct",
+      "eventEnded": null,
+      "reportedWaitLo": null,
+      "reportedWaitHi": null,
+      "note": "Champi forecast to approach the Fujian/Taiwan Strait coast about 5 days out (closest point about 360 km at +117h). Terminals still operating normally; forecast could still shift.",
+      "source": "JMA targetTc/specifications"
+    }
+  },
   "remarks": [
-    "Typhoon Champi is east of the Philippines and heading west-northwest; at the end of the JMA forecast (+117h) it is about 850 km from Xiamen, so no tracked port is inside the 600 km radius yet. Worth watching if the track bends north.",
-    "No active port closures or weather suspensions found at Shanghai, Ningbo, Yantian, Xiamen, Qingdao or Busan. Congestion data has no new snapshot since 11 Oct."
+    "Typhoon Champi is east of the Philippines heading west-northwest. The latest JMA forecast track now ends near 23N 121E, so Xiamen enters the 600 km radius (about 360 km) in roughly 5 days. Xiamen is on watch only; no port is closed or recovering.",
+    "No active port closures or backlogs found in current-dated sources."
   ]
 }
